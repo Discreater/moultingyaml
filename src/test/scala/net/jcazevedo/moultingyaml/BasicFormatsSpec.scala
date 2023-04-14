@@ -1,10 +1,10 @@
 package net.jcazevedo.moultingyaml
 
 import com.github.nscala_time.time.Imports._
-import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 
-class BasicFormatsSpec extends FlatSpec with BasicFormats {
+class BasicFormatsSpec extends AnyFlatSpec with BasicFormats {
 
   "The IntYamlFormat" should "convert an Int to a YamlNumber" in {
     42.toYaml should ===(YamlNumber(42))

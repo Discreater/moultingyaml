@@ -8,7 +8,7 @@ import scala.util.{ Try, Success, Failure }
  */
 trait StandardFormats {
 
-  implicit def optionFormat[A: YF] = new YF[Option[A]] {
+  implicit def optionFormat[A: YF]: YF[Option[A]] = new YF[Option[A]] {
 
     def write(option: Option[A]) = option match {
       case Some(x) => x.toYaml
@@ -21,7 +21,7 @@ trait StandardFormats {
     }
   }
 
-  implicit def eitherFormat[A: YF, B: YF] = new YF[Either[A, B]] {
+  implicit def eitherFormat[A: YF, B: YF]: YF[Either[A,B]] = new YF[Either[A, B]] {
 
     def write(either: Either[A, B]) = either match {
       case Right(a) => a.toYaml
@@ -41,7 +41,7 @@ trait StandardFormats {
       }
   }
 
-  implicit def tuple2Format[A: YF, B: YF] =
+  implicit def tuple2Format[A: YF, B: YF]: YamlFormat[(A, B)] =
     new YamlFormat[(A, B)] {
 
       def write(t: (A, B)) =
@@ -55,7 +55,7 @@ trait StandardFormats {
       }
     }
 
-  implicit def tuple3Format[A: YF, B: YF, C: YF] =
+  implicit def tuple3Format[A: YF, B: YF, C: YF]: YamlFormat[(A, B, C)] =
     new YamlFormat[(A, B, C)] {
 
       def write(t: (A, B, C)) =
@@ -69,7 +69,7 @@ trait StandardFormats {
       }
     }
 
-  implicit def tuple4Format[A: YF, B: YF, C: YF, D: YF] =
+  implicit def tuple4Format[A: YF, B: YF, C: YF, D: YF]: YamlFormat[(A, B, C, D)] =
     new YamlFormat[(A, B, C, D)] {
 
       def write(t: (A, B, C, D)) =
@@ -83,7 +83,7 @@ trait StandardFormats {
       }
     }
 
-  implicit def tuple5Format[A: YF, B: YF, C: YF, D: YF, E: YF] = {
+  implicit def tuple5Format[A: YF, B: YF, C: YF, D: YF, E: YF]: YamlFormat[(A, B, C, D, E)] = {
     new YamlFormat[(A, B, C, D, E)] {
 
       def write(t: (A, B, C, D, E)) =
@@ -100,7 +100,7 @@ trait StandardFormats {
     }
   }
 
-  implicit def tuple6Format[A: YF, B: YF, C: YF, D: YF, E: YF, F: YF] = {
+  implicit def tuple6Format[A: YF, B: YF, C: YF, D: YF, E: YF, F: YF]: YamlFormat[(A, B, C, D, E, F)] = {
     new YamlFormat[(A, B, C, D, E, F)] {
 
       def write(t: (A, B, C, D, E, F)) =
@@ -117,7 +117,7 @@ trait StandardFormats {
     }
   }
 
-  implicit def tuple7Format[A: YF, B: YF, C: YF, D: YF, E: YF, F: YF, G: YF] = {
+  implicit def tuple7Format[A: YF, B: YF, C: YF, D: YF, E: YF, F: YF, G: YF]: YamlFormat[(A, B, C, D, E, F, G)] = {
     new YamlFormat[(A, B, C, D, E, F, G)] {
 
       def write(t: (A, B, C, D, E, F, G)) =

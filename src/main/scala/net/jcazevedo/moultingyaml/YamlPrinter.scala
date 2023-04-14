@@ -28,7 +28,7 @@ sealed trait ScalarStyle {
 
 object ScalarStyle {
   val DEFAULT = Plain
-  def createStyle(char: Char) = CustomScalarStyle(char)
+  def createStyle(char: Char): CustomScalarStyle = CustomScalarStyle(char)
 }
 
 private[moultingyaml] case class CustomScalarStyle(val char: Char) extends ScalarStyle {

@@ -1,9 +1,9 @@
 package net.jcazevedo.moultingyaml
 
-import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 
-class CollectionFormatsSpec extends FlatSpec with CollectionFormats
+class CollectionFormatsSpec extends AnyFlatSpec with CollectionFormats
   with BasicFormats {
 
   {

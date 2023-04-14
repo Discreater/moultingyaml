@@ -16,7 +16,7 @@ trait AdditionalFormats {
   /**
    * Constructs a YamlFormat from its two parts, YamlReader and YamlWriter.
    */
-  def yamlFormat[A](reader: YamlReader[A], writer: YamlWriter[A]) = new YF[A] {
+  def yamlFormat[A](reader: YamlReader[A], writer: YamlWriter[A]): YF[A] = new YF[A] {
     def write(obj: A) = writer.write(obj)
     def read(value: YamlValue) = reader.read(value)
   }
@@ -25,7 +25,7 @@ trait AdditionalFormats {
    * Turns a YamlWriter into a YamlFormat that throws an
    * UnsupportedOperationException for reads.
    */
-  def lift[A](writer: YamlWriter[A]) = new YF[A] {
+  def lift[A](writer: YamlWriter[A]): YF[A] = new YF[A] {
     def write(obj: A) = writer.write(obj)
     def read(value: YamlValue) = throw new UnsupportedOperationException(
       "YamlReader implementation missing")
@@ -35,7 +35,7 @@ trait AdditionalFormats {
    * Turns a YamlReader into a YamlFormat that throws an
    * UnsupportedOperationException for writes.
    */
-  def lift[A](reader: YamlReader[A]) = new YF[A] {
+  def lift[A](reader: YamlReader[A]): YF[A] = new YF[A] {
     def write(obj: A) = throw new UnsupportedOperationException(
       "YamlWriter implementation missing")
     def read(value: YamlValue) = reader.read(value)
@@ -45,7 +45,8 @@ trait AdditionalFormats {
    * Lazy wrapper around serialization. Useful when you want to serialize
    * (mutually) recursive structures.
    */
-  def lazyFormat[A](format: => YF[A]) = new YF[A] {
+  def lazyFormat[A](format: => YF[A]): lazyFormat[A] = new lazyFormat[A](format)
+  class lazyFormat[A](format: => YF[A]) extends YF[A] {
     lazy val delegate = format
     def write(x: A) = delegate.write(x)
     def read(value: YamlValue) = delegate.read(value)

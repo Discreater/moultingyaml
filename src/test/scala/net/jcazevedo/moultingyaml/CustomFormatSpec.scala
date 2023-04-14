@@ -1,12 +1,12 @@
 package net.jcazevedo.moultingyaml
 
-import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 
-class CustomFormatSpec extends FlatSpec with DefaultYamlProtocol {
+class CustomFormatSpec extends AnyFlatSpec with DefaultYamlProtocol {
   case class MyType(name: String, value: Int)
 
-  implicit val MyTypeProtocol = new YamlFormat[MyType] {
+  implicit val MyTypeProtocol: YamlFormat[MyType] = new YamlFormat[MyType] {
     def read(yaml: YamlValue) =
       yaml.asYamlObject.getFields(
         YamlString("name"), YamlString("value")) match {

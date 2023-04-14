@@ -22,10 +22,10 @@ package object moultingyaml {
   def deserializationError(
     msg: String,
     cause: Throwable = null,
-    fieldNames: List[String] = Nil) =
+    fieldNames: List[String] = Nil): Nothing =
     throw new DeserializationException(msg, cause, fieldNames)
 
-  def serializationError(msg: String) = throw new SerializationException(msg)
+  def serializationError(msg: String): Nothing = throw new SerializationException(msg)
 
   private[moultingyaml] def convertToYamlValue(obj: Object): YamlValue = {
     obj match {
@@ -66,7 +66,7 @@ package object moultingyaml {
     def parseYaml: YamlValue =
       parseYaml()
 
-    def parseYaml(allowDuplicateKeys: Boolean = true, allowRecursiveKeys: Boolean = false, wrappedToRootException: Boolean = false, maxAliasesForCollections: Int = 50) = {
+    def parseYaml(allowDuplicateKeys: Boolean = true, allowRecursiveKeys: Boolean = false, wrappedToRootException: Boolean = false, maxAliasesForCollections: Int = 50): YamlValue = {
       val loaderOptions = new LoaderOptions()
       loaderOptions.setAllowDuplicateKeys(allowDuplicateKeys)
       loaderOptions.setAllowRecursiveKeys(allowRecursiveKeys)
@@ -78,7 +78,7 @@ package object moultingyaml {
     def parseYamls: Seq[YamlValue] =
       parseYamls()
 
-    def parseYamls(allowDuplicateKeys: Boolean = true, allowRecursiveKeys: Boolean = false, wrappedToRootException: Boolean = false, maxAliasesForCollections: Int = 50) = {
+    def parseYamls(allowDuplicateKeys: Boolean = true, allowRecursiveKeys: Boolean = false, wrappedToRootException: Boolean = false, maxAliasesForCollections: Int = 50): Seq[YamlValue] = {
       val loaderOptions = new LoaderOptions()
       loaderOptions.setAllowDuplicateKeys(allowDuplicateKeys)
       loaderOptions.setAllowRecursiveKeys(allowRecursiveKeys)

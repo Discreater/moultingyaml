@@ -7,10 +7,10 @@ import scala.util.{ Failure, Success, Try }
 
 import com.github.nscala_time.time.Imports._
 import org.scalactic.source.Position
-import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 
-class YamlParserSpec extends FlatSpec {
+class YamlParserSpec extends AnyFlatSpec {
   def getResourceURL(resource: String): String =
     URLDecoder.decode(getClass.getResource(resource).getFile, "UTF-8")
 

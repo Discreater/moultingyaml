@@ -60,33 +60,33 @@ trait CollectionFormats {
 
   import collection.{ immutable => imm }
 
-  implicit def immIterableFormat[T: YF] =
+  implicit def immIterableFormat[T: YF]: YF[imm.Iterable[T]] =
     viaSeq[imm.Iterable[T], T](seq => imm.Iterable(seq: _*))
 
-  implicit def immSeqFormat[T: YF] =
+  implicit def immSeqFormat[T: YF]: YF[Seq[T]] =
     viaSeq[imm.Seq[T], T](seq => imm.Seq(seq: _*))
 
-  implicit def immIndexedSeqFormat[T: YF] =
+  implicit def immIndexedSeqFormat[T: YF]: YF[IndexedSeq[T]] =
     viaSeq[imm.IndexedSeq[T], T](seq => imm.IndexedSeq(seq: _*))
 
-  implicit def immLinearSeqFormat[T: YF] =
+  implicit def immLinearSeqFormat[T: YF]: YF[imm.LinearSeq[T]] =
     viaSeq[imm.LinearSeq[T], T](seq => imm.LinearSeq(seq: _*))
 
-  implicit def vectorFormat[T: YF] =
+  implicit def vectorFormat[T: YF]: YF[Vector[T]] =
     viaSeq[Vector[T], T](seq => Vector(seq: _*))
 
   import collection._
 
-  implicit def iterableFormat[T: YF] =
+  implicit def iterableFormat[T: YF]: YF[Iterable[T]] =
     viaSeq[Iterable[T], T](seq => Iterable(seq: _*))
 
-  implicit def seqFormat[T: YF] =
+  implicit def seqFormat[T: YF]: YF[Seq[T]] =
     viaSeq[Seq[T], T](seq => Seq(seq: _*))
 
-  implicit def indexedSeqFormat[T: YF] =
+  implicit def indexedSeqFormat[T: YF]: YF[IndexedSeq[T]] =
     viaSeq[IndexedSeq[T], T](seq => IndexedSeq(seq: _*))
 
-  implicit def linearSeqFormat[T: YF] =
+  implicit def linearSeqFormat[T: YF]: YF[LinearSeq[T]] =
     viaSeq[LinearSeq[T], T](seq => LinearSeq(seq: _*))
 
   /**

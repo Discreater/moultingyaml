@@ -1,3 +1,2 @@
-addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.8.2")
-addSbtPlugin("org.scoverage"   % "sbt-scoverage"   % "1.6.0")
-addSbtPlugin("org.scoverage"   % "sbt-coveralls"   % "1.2.7")
+addSbtPlugin("org.scoverage"   % "sbt-scoverage"   % "1.9.3")
+addSbtPlugin("ch.epfl.scala" % "sbt-scala3-migrate" % "0.5.1")

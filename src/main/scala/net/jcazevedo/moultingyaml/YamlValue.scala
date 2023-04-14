@@ -21,14 +21,14 @@ sealed abstract class YamlValue {
 }
 
 object YamlValue {
-  implicit val implicitSnakeYamlPrinter = new SnakeYamlPrinter
+  implicit val implicitSnakeYamlPrinter: SnakeYamlPrinter = new SnakeYamlPrinter
 }
 
 /**
  * A YAML mapping from scalars to scalars.
  */
 case class YamlObject(fields: Map[YamlValue, YamlValue]) extends YamlValue {
-  override def asYamlObject(errorMsg: String) = this
+  override def asYamlObject(errorMsg: String): YamlObject = this
 
   def getFields(fieldKeys: YamlValue*): Seq[YamlValue] =
     fieldKeys.flatMap(fields.get).toSeq
@@ -93,7 +93,7 @@ case class YamlNumber(value: BigDecimal) extends YamlValue {
 object YamlNumber {
   def apply(n: Int) = new YamlNumber(BigDecimal(n))
   def apply(n: Long) = new YamlNumber(BigDecimal(n))
-  def apply(n: Double) = n match {
+  def apply(n: Double): YamlValue = n match {
     case n if n.isNaN => YamlNaN
     case n if n.isPosInfinity => YamlPositiveInf
     case n if n.isNegInfinity => YamlNegativeInf

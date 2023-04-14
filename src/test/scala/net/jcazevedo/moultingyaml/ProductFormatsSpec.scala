@@ -1,11 +1,12 @@
 package net.jcazevedo.moultingyaml
 
-import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 import org.scalatest.Inside._
 import org.scalatest.Inspectors._
+import net.jcazevedo.moultingyaml.YF
 
-class ProductFormatsSpec extends FlatSpec {
+class ProductFormatsSpec extends AnyFlatSpec {
 
   case class Test0()
   case class Test2(a: Int, b: Option[Double])
@@ -26,15 +27,15 @@ class ProductFormatsSpec extends FlatSpec {
       `=><+-*/!@#%^&~?|`: Float)
 
   trait TestProtocol extends DefaultYamlProtocol {
-    implicit val test0Format = yamlFormat0(Test0)
-    implicit val test2Format = yamlFormat2(Test2)
-    implicit def test3Format[A: YamlFormat, B: YamlFormat] =
+    implicit val test0Format: YF[Test0] = yamlFormat0(Test0)
+    implicit val test2Format: YF[Test2] = yamlFormat2(Test2)
+    implicit def test3Format[A: YamlFormat, B: YamlFormat]: YF[Test3[A,B]] =
       yamlFormat2(Test3.apply[A, B])
-    implicit val test4Format = yamlFormat1(Test4)
-    implicit val test5Format = yamlFormat22(Test5)
-    implicit val testTransientFormat = yamlFormat2(TestTransient)
-    implicit val testStaticFormat = yamlFormat2(TestStatic)
-    implicit val testMangledFormat = yamlFormat5(TestMangled)
+    implicit val test4Format: YF[Test4] = yamlFormat1(Test4)
+    implicit val test5Format: YF[Test5] = yamlFormat22(Test5)
+    implicit val testTransientFormat: YF[TestTransient] = yamlFormat2(TestTransient)
+    implicit val testStaticFormat: YF[TestStatic] = yamlFormat2(TestStatic)
+    implicit val testMangledFormat: YF[TestMangled] = yamlFormat5(TestMangled)
   }
 
   object TestProtocol extends TestProtocol

@@ -5,11 +5,11 @@ import java.net.URLDecoder
 
 import scala.io.Source
 
-import org.scalatest.FlatSpec
 import org.scalatest.Inspectors._
-import org.scalatest.Matchers._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers._
 
-class RoundTripSpec extends FlatSpec {
+class RoundTripSpec extends AnyFlatSpec {
   def getResourceURL(resource: String): String =
     URLDecoder.decode(getClass.getResource(resource).getFile, "UTF-8")
 

@@ -9,7 +9,7 @@ import scala.reflect.{ ClassTag, NameTransformer }
  */
 trait ProductFormats {
 
-  def yamlFormat0[T <: Product: ClassTag](construct: () => T) = new YF[T] {
+  def yamlFormat0[T <: Product: ClassTag](construct: () => T): YF[T] = new YF[T] {
     def write(p: T) = YamlObject()
     def read(value: YamlValue) = value match {
       case _: YamlObject => construct()
@@ -172,7 +172,7 @@ trait ProductFormats {
   }
 
   def yamlFormat[A: YF, T <: Product](
-    construct: A => T, field1: (String, Boolean)) = new YF[T] {
+    construct: A => T, field1: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -186,7 +186,7 @@ trait ProductFormats {
 
   def yamlFormat[A: YF, B: YF, T <: Product](
     construct: (A, B) => T, field1: (String, Boolean),
-    field2: (String, Boolean)) = new YF[T] {
+    field2: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -202,7 +202,7 @@ trait ProductFormats {
 
   def yamlFormat[A: YF, B: YF, C: YF, T <: Product](
     construct: (A, B, C) => T, field1: (String, Boolean),
-    field2: (String, Boolean), field3: (String, Boolean)) = new YF[T] {
+    field2: (String, Boolean), field3: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -221,7 +221,7 @@ trait ProductFormats {
   def yamlFormat[A: YF, B: YF, C: YF, D: YF, T <: Product](
     construct: (A, B, C, D) => T, field1: (String, Boolean),
     field2: (String, Boolean), field3: (String, Boolean),
-    field4: (String, Boolean)) = new YF[T] {
+    field4: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -242,7 +242,7 @@ trait ProductFormats {
   def yamlFormat[A: YF, B: YF, C: YF, D: YF, E: YF, T <: Product](
     construct: (A, B, C, D, E) => T, field1: (String, Boolean),
     field2: (String, Boolean), field3: (String, Boolean),
-    field4: (String, Boolean), field5: (String, Boolean)) = new YF[T] {
+    field4: (String, Boolean), field5: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -266,7 +266,7 @@ trait ProductFormats {
     construct: (A, B, C, D, E, F) => T, field1: (String, Boolean),
     field2: (String, Boolean), field3: (String, Boolean),
     field4: (String, Boolean), field5: (String, Boolean),
-    field6: (String, Boolean)) = new YF[T] {
+    field6: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -292,7 +292,7 @@ trait ProductFormats {
     construct: (A, B, C, D, E, F, G) => T, field1: (String, Boolean),
     field2: (String, Boolean), field3: (String, Boolean),
     field4: (String, Boolean), field5: (String, Boolean),
-    field6: (String, Boolean), field7: (String, Boolean)) = new YF[T] {
+    field6: (String, Boolean), field7: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -321,7 +321,7 @@ trait ProductFormats {
     field2: (String, Boolean), field3: (String, Boolean),
     field4: (String, Boolean), field5: (String, Boolean),
     field6: (String, Boolean), field7: (String, Boolean),
-    field8: (String, Boolean)) = new YF[T] {
+    field8: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -352,7 +352,7 @@ trait ProductFormats {
     field2: (String, Boolean), field3: (String, Boolean),
     field4: (String, Boolean), field5: (String, Boolean),
     field6: (String, Boolean), field7: (String, Boolean),
-    field8: (String, Boolean), field9: (String, Boolean)) = new YF[T] {
+    field8: (String, Boolean), field9: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -386,7 +386,7 @@ trait ProductFormats {
     field4: (String, Boolean), field5: (String, Boolean),
     field6: (String, Boolean), field7: (String, Boolean),
     field8: (String, Boolean), field9: (String, Boolean),
-    field10: (String, Boolean)) = new YF[T] {
+    field10: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -422,7 +422,7 @@ trait ProductFormats {
     field4: (String, Boolean), field5: (String, Boolean),
     field6: (String, Boolean), field7: (String, Boolean),
     field8: (String, Boolean), field9: (String, Boolean),
-    field10: (String, Boolean), field11: (String, Boolean)) = new YF[T] {
+    field10: (String, Boolean), field11: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -461,7 +461,7 @@ trait ProductFormats {
     field6: (String, Boolean), field7: (String, Boolean),
     field8: (String, Boolean), field9: (String, Boolean),
     field10: (String, Boolean), field11: (String, Boolean),
-    field12: (String, Boolean)) = new YF[T] {
+    field12: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -502,7 +502,7 @@ trait ProductFormats {
     field6: (String, Boolean), field7: (String, Boolean),
     field8: (String, Boolean), field9: (String, Boolean),
     field10: (String, Boolean), field11: (String, Boolean),
-    field12: (String, Boolean), field13: (String, Boolean)) = new YF[T] {
+    field12: (String, Boolean), field13: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -546,7 +546,7 @@ trait ProductFormats {
     field8: (String, Boolean), field9: (String, Boolean),
     field10: (String, Boolean), field11: (String, Boolean),
     field12: (String, Boolean), field13: (String, Boolean),
-    field14: (String, Boolean)) = new YF[T] {
+    field14: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -592,7 +592,7 @@ trait ProductFormats {
     field8: (String, Boolean), field9: (String, Boolean),
     field10: (String, Boolean), field11: (String, Boolean),
     field12: (String, Boolean), field13: (String, Boolean),
-    field14: (String, Boolean), field15: (String, Boolean)) = new YF[T] {
+    field14: (String, Boolean), field15: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -641,7 +641,7 @@ trait ProductFormats {
     field10: (String, Boolean), field11: (String, Boolean),
     field12: (String, Boolean), field13: (String, Boolean),
     field14: (String, Boolean), field15: (String, Boolean),
-    field16: (String, Boolean)) = new YF[T] {
+    field16: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -692,7 +692,7 @@ trait ProductFormats {
     field10: (String, Boolean), field11: (String, Boolean),
     field12: (String, Boolean), field13: (String, Boolean),
     field14: (String, Boolean), field15: (String, Boolean),
-    field16: (String, Boolean), field17: (String, Boolean)) = new YF[T] {
+    field16: (String, Boolean), field17: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -746,7 +746,7 @@ trait ProductFormats {
     field12: (String, Boolean), field13: (String, Boolean),
     field14: (String, Boolean), field15: (String, Boolean),
     field16: (String, Boolean), field17: (String, Boolean),
-    field18: (String, Boolean)) = new YF[T] {
+    field18: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -802,7 +802,7 @@ trait ProductFormats {
     field12: (String, Boolean), field13: (String, Boolean),
     field14: (String, Boolean), field15: (String, Boolean),
     field16: (String, Boolean), field17: (String, Boolean),
-    field18: (String, Boolean), field19: (String, Boolean)) = new YF[T] {
+    field18: (String, Boolean), field19: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -861,7 +861,7 @@ trait ProductFormats {
     field14: (String, Boolean), field15: (String, Boolean),
     field16: (String, Boolean), field17: (String, Boolean),
     field18: (String, Boolean), field19: (String, Boolean),
-    field20: (String, Boolean)) = new YF[T] {
+    field20: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -922,7 +922,7 @@ trait ProductFormats {
     field14: (String, Boolean), field15: (String, Boolean),
     field16: (String, Boolean), field17: (String, Boolean),
     field18: (String, Boolean), field19: (String, Boolean),
-    field20: (String, Boolean), field21: (String, Boolean)) = new YF[T] {
+    field20: (String, Boolean), field21: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -986,7 +986,7 @@ trait ProductFormats {
     field16: (String, Boolean), field17: (String, Boolean),
     field18: (String, Boolean), field19: (String, Boolean),
     field20: (String, Boolean), field21: (String, Boolean),
-    field22: (String, Boolean)) = new YF[T] {
+    field22: (String, Boolean)): YF[T] = new YF[T] {
 
     def write(p: T) = {
       val fields = Seq(
@@ -1067,7 +1067,7 @@ trait ProductFormats {
   protected[this] def readField[A: YamlReader](
     value: YamlValue,
     fieldName: String,
-    isOption: Boolean) = value match {
+    isOption: Boolean): A = value match {
 
     case YamlObject(fields) if isOption &&
       !fields.contains(YamlString(fieldName)) => None.asInstanceOf[A]
@@ -1108,6 +1108,6 @@ object ProductFormats {
  */
 trait NullOptions extends ProductFormats {
   override protected[this] def writeField[A: YamlWriter](
-    value: Any, fieldName: String, isOption: Boolean) =
+    value: Any, fieldName: String, isOption: Boolean): Option[(YamlString, YamlValue)] =
     Some(YamlString(fieldName) -> value.asInstanceOf[A].toYaml)
 }
