@@ -3,7 +3,7 @@ package net.jcazevedo
 import com.github.nscala_time.time.Imports._
 import org.yaml.snakeyaml.{ LoaderOptions, Yaml }
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 package object moultingyaml {
 

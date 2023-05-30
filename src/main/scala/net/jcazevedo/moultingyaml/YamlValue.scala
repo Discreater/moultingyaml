@@ -1,7 +1,7 @@
 package net.jcazevedo.moultingyaml
 
 import com.github.nscala_time.time.Imports._
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 /**
  * The general type of a YAML AST node.
@@ -126,7 +126,7 @@ case class YamlDate(date: DateTime) extends YamlValue {
  */
 case class YamlBoolean(boolean: Boolean) extends YamlValue {
   private[moultingyaml] lazy val snakeYamlObject: Object =
-    new java.lang.Boolean(boolean)
+    java.lang.Boolean.valueOf(boolean)
 }
 
 /**

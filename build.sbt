@@ -1,38 +1,46 @@
 
-ThisBuild / scalaVersion := "2.13.10"
+ThisBuild / scalaVersion := "3.2.2"
 ThisBuild / version := "0.4.3-SNAPSHOT"
 ThisBuild / organization := "net.jcazevedo"
 
-crossScalaVersions := Seq("2.13.10", "2.12.17")
+crossScalaVersions := Seq("2.13.10", "2.12.17", "3.2.2")
 
 val isScala3 = Def.setting(
   CrossVersion.partialVersion(scalaVersion.value).exists(_._1 == 3)
 )
 
 lazy val root = (project in file("."))
-  .settings(
+  .settings(Seq(
     name := "moultingyaml",
     libraryDependencies ++= Seq(
       "com.github.nscala-time" %% "nscala-time" % "2.33.0-SNAPSHOT",
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.yaml" % "snakeyaml" % "1.32",
       "org.scalatest" %% "scalatest" % "3.2.15" % "test"
-    ),
+    ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, _)) => Seq(
+        "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+        compilerPlugin(scalafixSemanticdb)
+      )
+      case _ => Seq.empty
+    }),
     scalacOptions ++= Seq(
       "-deprecation",
       "-unchecked",
       "-feature",
       "-language:implicitConversions") ++
       (CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((3, major)) => Seq("-XSemanticdb")
-        case Some((2, major)) if major >= 13 => Seq("-Ywarn-unused:imports", "-Yrangepos")
+        case Some((3, major)) => Seq(
+//          "-XSemanticdb"
+        )
+        case Some((2, major)) if major >= 13 => Seq("-Ywarn-unused:imports", "-Yrangepos", "-P:semanticdb:enable")
         case Some((2, major)) if major >= 11 => Seq("-Ywarn-unused-import", "-Yrangepos")
         case _ => Seq()
       }),
-    addCompilerPlugin("org.scalameta" % "semanticdb-scalac" % "4.7.6" cross CrossVersion.full),
     Compile / console / scalacOptions ~= (_ filterNot (Set("-Ywarn-unused:imports", "-Ywarn-unused-import").contains)),
     Test / console / scalacOptions := ( Compile / console / scalacOptions).value,
   )
+  )
+
 
 //scalariformPreferences := scalariformPreferences.value
 //  .setPreference(DanglingCloseParenthesis, Prevent)
